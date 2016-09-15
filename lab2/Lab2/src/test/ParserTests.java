@@ -36,5 +36,6 @@ public class ParserTests {
 	@Test
 	public void testEmptyModule() {
 		runtest("module Test { }");
+		runtest("module Foo {}", true);
 	}
 }

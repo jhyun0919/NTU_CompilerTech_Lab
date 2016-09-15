@@ -1,0 +1,103 @@
+// package the generated Java class lives in; no need to change this
+%package "parser";
+
+// name of the generated Java class; no need to change this
+%class "Parser";
+
+// no need to change this either
+%embed {:
+	// turn off automated error recovery
+	@Override
+	protected void recoverFromError(Symbol token, TokenStream in) throws java.io.IOException, Exception {
+		super.recoverFromError(new Symbol(0), in);
+	}
+:};
+
+// the list of all terminals; no need to change this
+%terminals MODULE, INT, VOID, IF, ELSE, WHILE, RETURN, BREAK, BOOLEAN, PUBLIC, TRUE, FALSE,
+           INT_LITERAL, STRING_LITERAL, ID, TYPE, IMPORT,
+           PLUS, MINUS, TIMES, DIV, MOD, EQEQ, NEQ, LEQ, GEQ, LT, GT,
+           LBRACKET, RPAREN, COMMA, RCURLY, LCURLY, SEMICOLON, RBRACKET, LPAREN, EQL;
+           
+// declaration of start symbol; no need to change this
+%goal Module;
+
+Module = MODULE ID LCURLY ImportStmt DeclarationStmt RCURLY;
+ImportStmt = IMPORT ID SEMICOLON ImportStmt
+	 	  |
+	      ;
+DeclarationStmt = FunctionDeclarationStmt DeclarationStmt
+			  | FieldDeclarationStmt DeclarationStmt
+			  | TypeDeclarationStmt DeclarationStmt
+			  |
+			  ;
+FunctionDeclarationStmt = Accessibility TypeName ID LPAREN ParameterlistStmt RPAREN LCURLY StatementList RCURLY;
+Accessibility = PUBLIC
+		     |
+             ;
+ParameterStmt = TypeName ID;
+ParameterlistStmt = ParameterStmt ParameterlistStmtTail
+				  |
+				  ;
+ParameterlistStmtTail = COMMA ParameterStmt ParameterlistStmtTail
+			          |
+			          ;
+Statement = LocalVariableDeclaration | StatementBlock | IfStmt | WhileStmt | BreakStmt | ReturnStmt | ExprStmt;
+StatementList = Statement StatementListTail
+			  |
+			  ;
+StatementListTail = COMMA Statement StatementListTail
+				  |
+				  ;
+LocalVariableDeclaration = TypeName ID SEMICOLON;
+StatementBlock = LCURLY StatementList RCURLY;
+IfStmt = IF LPAREN Expr RPAREN Statement ELSE Statement;
+WhileStmt = WHILE LPAREN Expr RPAREN Statement;
+BreakStmt = BREAK SEMICOLON;
+ReturnStmt = RETURN Expr SEMICOLON
+		   | RETURN SEMICOLON
+		   ;
+ExprStmt = Expr SEMICOLON;
+Expr = Assignment | RHSExpr;
+ExprList = Expr ExprListTail
+		 |
+		 ;
+ExprListTail = COMMA Expr ExprListTail
+			 |
+			 ;
+NonEmptyExprList = Expr ExprListTail;
+Assignment = LHSExpr EQL Expr;
+LHSExpr = ID 
+	  | LHSExpr LBRACKET Expr RBRACKET
+	  ;
+RHSExpr = ArithmeticExpr
+		| ArithmeticExpr ComparisionOperator ArithmeticExpr;
+ArithmeticExpr = ArithmeticExpr AdditiveOperator Term 
+			   | Term
+			   ;
+Term = Term MultiplicativeOperator Factor 
+	  | Factor
+	  ;
+MultiplicativeOperator = TIMES | DIV | MOD;
+Factor = MINUS Factor | PrimaryExpr;
+PrimaryExpr = LHSExpr
+			| FunctionCall
+			| ArrayExpr
+			| STRING_LITERAL
+			| INT_LITERAL
+			| BooleanLiteral
+			| ParenthesisedExpr
+			;
+FunctionCall = ID LPAREN ExprList RPAREN;
+ArrayExpr = LBRACKET NonEmptyExprList RBRACKET;
+BooleanLiteral = TRUE | FALSE;
+ParenthesisedExpr = LPAREN Expr RPAREN;
+AdditiveOperator = PLUS | MINUS;
+ComparisionOperator = EQEQ | NEQ | LEQ | GEQ | LT | GT;
+FieldDeclarationStmt = Accessibility TypeName ID SEMICOLON;
+TypeDeclarationStmt = Accessibility TYPE ID EQL STRING_LITERAL SEMICOLON;
+TypeName = PrimitiveType | ArrayType | ID;
+PrimitiveType = VOID | INT | BOOLEAN;
+ArrayType = TypeName LBRACKET RBRACKET;
+
+/**/
