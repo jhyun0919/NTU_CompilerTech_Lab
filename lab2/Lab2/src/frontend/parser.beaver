@@ -24,17 +24,17 @@
 
 Module = MODULE ID LCURLY ImportStmt DeclarationStmt RCURLY;
 ImportStmt = IMPORT ID SEMICOLON ImportStmt
-	 	  |
-	      ;
+	 	   | 
+	       ;
 DeclarationStmt = FunctionDeclarationStmt DeclarationStmt
-			  | FieldDeclarationStmt DeclarationStmt
-			  | TypeDeclarationStmt DeclarationStmt
-			  |
-			  ;
+			    | FieldDeclarationStmt DeclarationStmt
+			    | TypeDeclarationStmt DeclarationStmt
+			    |
+			    ;
 FunctionDeclarationStmt = Accessibility TypeName ID LPAREN ParameterlistStmt RPAREN LCURLY StatementList RCURLY;
 Accessibility = PUBLIC
-		     |
-             ;
+		      |
+              ;
 ParameterStmt = TypeName ID;
 ParameterlistStmt = ParameterStmt ParameterlistStmtTail
 				  |
@@ -43,12 +43,9 @@ ParameterlistStmtTail = COMMA ParameterStmt ParameterlistStmtTail
 			          |
 			          ;
 Statement = LocalVariableDeclaration | StatementBlock | IfStmt | WhileStmt | BreakStmt | ReturnStmt | ExprStmt;
-StatementList = Statement StatementListTail
+StatementList = Statement StatementList
 			  |
 			  ;
-StatementListTail = COMMA Statement StatementListTail
-				  |
-				  ;
 LocalVariableDeclaration = TypeName ID SEMICOLON;
 StatementBlock = LCURLY StatementList RCURLY;
 IfStmt = IF LPAREN Expr RPAREN Statement ELSE Statement;
@@ -67,17 +64,14 @@ ExprListTail = COMMA Expr ExprListTail
 			 ;
 NonEmptyExprList = Expr ExprListTail;
 Assignment = LHSExpr EQL Expr;
-LHSExpr = ID
-	  | LHSExpr LBRACKET Expr RBRACKET
-	  ;
 RHSExpr = ArithmeticExpr
 		| ArithmeticExpr ComparisionOperator ArithmeticExpr;
 ArithmeticExpr = ArithmeticExpr AdditiveOperator Term 
 			   | Term
 			   ;
 Term = Term MultiplicativeOperator Factor 
-	  | Factor
-	  ;
+	 | Factor
+	 ;
 MultiplicativeOperator = TIMES | DIV | MOD;
 Factor = MINUS Factor | PrimaryExpr;
 PrimaryExpr = LHSExpr
@@ -96,8 +90,14 @@ AdditiveOperator = PLUS | MINUS;
 ComparisionOperator = EQEQ | NEQ | LEQ | GEQ | LT | GT;
 FieldDeclarationStmt = Accessibility TypeName ID SEMICOLON;
 TypeDeclarationStmt = Accessibility TYPE ID EQL STRING_LITERAL SEMICOLON;
-TypeName = PrimitiveType | ArrayType | ID;
 PrimitiveType = VOID | INT | BOOLEAN;
-ArrayType = TypeName LBRACKET RBRACKET;
 
+// Fixing reduce-reduce + shift-reduce conflicts
+TypeName = PrimitiveType | ArrayType | ID;
+ArrayType = ID LBRACKET RBRACKET
+		  | ArrayType LBRACKET RBRACKET; 
+LHSExpr = ID
+	    | IndexExpr;
+IndexExpr = ID LBRACKET Expr RBRACKET
+		  | IndexExpr LBRACKET Expr RBRACKET;
 /**/

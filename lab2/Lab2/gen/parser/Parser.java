@@ -21,17 +21,17 @@ public class Parser extends beaver.Parser {
 		static public final short FALSE = 8;
 		static public final short RCURLY = 9;
 		static public final short RPAREN = 10;
-		static public final short BOOLEAN = 11;
-		static public final short VOID = 12;
-		static public final short INT = 13;
+		static public final short VOID = 11;
+		static public final short INT = 12;
+		static public final short BOOLEAN = 13;
 		static public final short LCURLY = 14;
 		static public final short SEMICOLON = 15;
-		static public final short COMMA = 16;
+		static public final short RBRACKET = 16;
 		static public final short IF = 17;
 		static public final short WHILE = 18;
 		static public final short BREAK = 19;
 		static public final short RETURN = 20;
-		static public final short RBRACKET = 21;
+		static public final short COMMA = 21;
 		static public final short PUBLIC = 22;
 		static public final short EQL = 23;
 		static public final short IMPORT = 24;
@@ -51,32 +51,32 @@ public class Parser extends beaver.Parser {
 	}
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9pDLcTq55KK$cOIm4s41J44f6h8XZIGbX12Ix8X2Gb1GY10096YKXGLKR40Dkoe$E7untF" +
-		"m77vui86AWWL5nTuRHCM2YbA2Y4OquFMRjo#xixEPtQp77#wURsxxxdrltjnvRm1p5UPWB2" +
-		"fnFkPYFXPW9efnDKPZ3DAm4jSY5RtG6ttG5$rmDiv19xJ7QKZ2wJ2H4dUk9v0hcv4P8$SiH" +
-		"svqzg2us8FZOkSvsDTXAHQY0XTW7XPZYVo4YLY5wt431Y01YSZ64EIZe1NUk21ldVpfniCz" +
-		"g6lXoPwel7R1UXsYyKI2zKv6vJK7UN$Xp20lSdMcgjM9z5$iuizL$gxeXYcjH8Ufw8MjH4Q" +
-		"wr2joyLUx#AUx#2zH$lCSwz09oRh3ksCKiwh2ilmH$9xI4E6BPLyMar4UDkuoU5KlNeuhi1" +
-		"nNOWMkSiniVDnpYDUU43PU9tJKgxGMjwYvhPMVqPcMJmu4#aYEwtuAM3#YFrR3XtISWIxeW" +
-		"TjrNZrcONRWIivjAENgrCWUrA2774C9KOURC1atAjoA3DR8GWu6ubmCnN3obs442b76zt0Q" +
-		"QkKBp6166IRX8Yp2fV8vrk0Q#Gqtow#u0tVYBjoDUt4Vrk5#LihWsvF9UjcicCkQWrXrC3j" +
-		"$AFjoED$zVDOkO2SMiXUiRXdBjxY8kq79lywjZZlt$yCskEjRUrmxdW8T#Fmzj9BP0ntP3m" +
-		"RHXS#sA$UEI5vgaDUTbXkl6pkeXPSIbJS#oFD4vQ6DF8#D5xeFjzM9rv$4gbMkqOd$sJZn#" +
-		"fth4EhI2kuuaLbEVWNlpEcBPIV6P8IFsqltOk3qJUCkaXunitZd4AyTFbvebGmzDuFFr#0$" +
-		"8TX7ILe6hbQqZ54lTr6JFTvRv$NWTqvFVVKmwkUO9dCjJX9tsoJACjReh63mdR16i1XzrTN" +
-		"FrV7oNqf$CUqaNZlJIk7VibDuZdWfozLpIkNzU2czV0V7yyrOluON4VcROXFn0F4GiPNOIn" +
-		"mZTXD7Y0RY9D4860PWzYNIYH546drPZ9qYDb3FiUhIdqtqehAJSZJHp$AxWV5XHARMIm8Ic" +
-		"wbFrhuPhBsHieR6nvHZA0$es2p67gQSIgDP#wO4fB6QUctaU7YGiIsQiutOGLufvIxA3Chz" +
-		"EdR8DiTvj8zJrccxN7Dut#PixIiYvj3NJ3bJ#xAYtRjZ7HA8wNgEswdNssB9nC8srfdli2S" +
-		"uR3#nYF0Hx0Tp2J7DmLb1p2MM4ujj$fN4Kc91YuzzTDYsjXjeDzXY9$GwLMgvJykDeHpZg8" +
-		"tVOFFxTKtkvaPTM#xTYPRnRJLDNJDNIxyjraNxwXqvVTpgM$qVa6OYzKM1lhTwodfFZ4sQq" +
-		"#Z8oOkiWuCXtUolUSLMFsgVhwttp5#JhLQEO#pgjjQ9FKxmdKrsZXD7ZNmzv$NGFpabJKes" +
-		"XU3yoGcR$eiSbKOv8eVba1nKdX#8HvJsVLZM$g3s7V6jqhwHh#Kh#LBUeFwPS7UHZuWFYVU" +
-		"9j#HDAqBj4#9JfRsiQ#oHlVA1l2lloDlodhmkk#KrULLUaLqg#fAwxfGNbNn1dfVdP8Tibs" +
-		"Vb6TacJzEtJxRA5db27fV7vD6mUVvExrD1wqdvGw#BjL$NyZkoFNVnHBMJZ#5f409uEdbuI" +
-		"Xa4U7wOwjIPGBsSvqGvvN36t512RWav5UHMKEPHvXCZU18My0GPoNWXxKBAKSGWvbYeebv5" +
-		"Vh4wYy2l6fFV60ayEKqYKNrj3AOzKC7WgPsWJkvI6tpa#YW7H44cQsKnDvkwXHpgVaeBbIu" +
-		"OnvmYhjSGTM87CDI6OQmnwHybVdVt");
+		"U9pLLWkKJLKO$iwTX#x5336CI1uPnfZ6c0Sp1Z73DCmWePgeI6IAJ4WFZo7oreIfrgfLMgr" +
+		"MAy$abLwANahIMueUIdfJ4aL$tzbttpkdS##vTsRKMdNl#ixtx$r$$zxd$Fi9kBRXAcJZKl" +
+		"J1HIX08Ofm1RfXCheW2oqm1RUWCPhW73H5CvoBvZWFCOZ6MV2W3k9g4ElMiV4rYAsjOyyF6" +
+		"zlU5XjEtw6Q#bIR$dQCmTN8Gr$qmxKOBOTn8QPZ1ihG6YvqHmAIqGdfWJfPwTSDG4a8tJw$" +
+		"Rh2STDAX715#NMH8tTr#NLH8NIsVJaHE#NN1yZD8vIUOvnhjoRTvUiWVyZi61erffs961FM" +
+		"bEFQKuUZ9SVGCSVHSxkYvpj5pVHXFVrk6Or1Np#fww1oGevu1#ddoIK2TTuHYrSniW6a1$d" +
+		"3byM4Lmp0SL#fdGuoJzPojKt4Z9g0KDs4Y9WL4vDg#nExl7SP$fkLvk5FbmyVr#PKgJ$ABv" +
+		"fDeX9PSLmimKvx4sRWLi#Ke5XBbN6FhCGxpvHkqGXlSWRR41KX44ZeY3LsvkZFH2nVZ4jcF" +
+		"eRYCzc0KOnH6oaUu0MDnisp0RR9PDib6p99Zc2C$Oov7PX4MOocMu2wkl#K0bd55jULSJ#I" +
+		"EbSHTA9czfB2FLAwoDAwp3FRJMSsRRFQQmrdK7JtOUq$scFk$YVstzGRts0X48eedKosk9Z" +
+		"TdLsskgBfSNSqv7#fpT1jmtWRg#ljrfiTPLy#lYsF9ITU8DJvTJ4XTl5#N7rBdzkjWqJddf" +
+		"teUD$#58MAA$h6U$YiUUuOhPxN1$JCmpgutk5FRwxmZv9sP7iwKm9ZGvSYm2kzTm$kCuPt3" +
+		"ws#1bjoTMlCsr2OWmlubrVMVUTcR3n#xwFFcoQFPd7jcDcDv0XZSjIF87jwcF9prSQnfnXe" +
+		"tlMwMN0eUthDCVMEkxbYU71xkzYOYQCSnxtc4#JSrXXe7yr$0Se4QDREcCH55VppoHSX0HH" +
+		"dKRobnY3X072Js04OqqP3sb#Gwv1Fa3C0raPn9BY7l89SIusdl9tkeUvWyIRUxYVOSqtO2$" +
+		"TE8CgtVINkkhYzdcuV92ramsvv2FgfzV5$Z27anEKhNpVUoiPdseY3zpABlXDQSPjaW9X1k" +
+		"ba#IMsbTfr3lMzaUjZDkD$NBTDnaeeBeHIpHTGyIVOdbkjzJGTvh476FRjFCvxqMNp7naBP" +
+		"74lTLxTrSzsjUISma7j3b9do7lTfUJQmXrX9JYSVe#u0ydNYSsA1r2uX7jMsEvmfY8x7Aqj" +
+		"yMOXtnY2K$fHPxA#$F#tnbsdeSq4ZdPQRczPOsiopwWDYgmjT7PTbegklJDHTQV8cwRfGj9" +
+		"jEvVIDNnuocpPFADOIyWZoKyCtDk6gyxp5B3efr7mDf3xFqEToY6MQDrtx3uXzXyvLOx2bL" +
+		"VQ$GxspC3gnpZT7SZHXRyxPTaxsC2kYVd9RZYezNmlwJ4#fvH7wI7#K7#Lw#aszLpTVgUUX" +
+		"lsg$y5lSwEQYiB#Hp#LGEo2xQU#L3Fhasv7tYNMAtl2cxv0rvNNRAQ$Agl29hLTJBkfrzyh" +
+		"6iKTOgUK$UbZtobhoZoY#fvmxPhlX5zLmjByWsULwUasVb6NbQjhBkCztIEhDbUIB85$wgd" +
+		"a$vorlaDvsTFqb3UBkBvlqgaW3FUPS5uAdlvkbl4E39u#89P08yAo88y8vfE2ANsbngEbFR" +
+		"XSZYcPVDSwKhwtDOpY5t8pfIQwAGTY7rvbcLHovYEPMsUH$fH4vHC7ZVY51tZZuM952RG4u" +
+		"CWVRynYJ6Tg1j8fbsRxA9VWxeoPXUp4ywRH$IBCXW6oRQqZRHZdeJ0$u2y#gHu0==");
 
 	static final Action RETURN6 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
@@ -153,84 +153,85 @@ public class Parser extends beaver.Parser {
 			Action.RETURN,	// [19] Statement = BreakStmt
 			Action.RETURN,	// [20] Statement = ReturnStmt
 			Action.RETURN,	// [21] Statement = ExprStmt
-			RETURN2,	// [22] StatementList = Statement StatementListTail; returns 'StatementListTail' although none is marked
+			RETURN2,	// [22] StatementList = Statement StatementList; returns 'StatementList' although none is marked
 			Action.NONE,  	// [23] StatementList = 
-			RETURN3,	// [24] StatementListTail = COMMA Statement StatementListTail; returns 'StatementListTail' although none is marked
-			Action.NONE,  	// [25] StatementListTail = 
-			RETURN3,	// [26] LocalVariableDeclaration = TypeName ID SEMICOLON; returns 'SEMICOLON' although none is marked
-			RETURN3,	// [27] StatementBlock = LCURLY StatementList RCURLY; returns 'RCURLY' although none is marked
-			RETURN7,	// [28] IfStmt = IF LPAREN Expr RPAREN Statement ELSE Statement; returns 'Statement' although none is marked
-			RETURN5,	// [29] WhileStmt = WHILE LPAREN Expr RPAREN Statement; returns 'Statement' although none is marked
-			RETURN2,	// [30] BreakStmt = BREAK SEMICOLON; returns 'SEMICOLON' although none is marked
-			RETURN3,	// [31] ReturnStmt = RETURN Expr SEMICOLON; returns 'SEMICOLON' although none is marked
-			RETURN2,	// [32] ReturnStmt = RETURN SEMICOLON; returns 'SEMICOLON' although none is marked
-			RETURN2,	// [33] ExprStmt = Expr SEMICOLON; returns 'SEMICOLON' although none is marked
-			Action.RETURN,	// [34] Expr = Assignment
-			Action.RETURN,	// [35] Expr = RHSExpr
-			RETURN2,	// [36] ExprList = Expr ExprListTail; returns 'ExprListTail' although none is marked
-			Action.NONE,  	// [37] ExprList = 
-			RETURN3,	// [38] ExprListTail = COMMA Expr ExprListTail; returns 'ExprListTail' although none is marked
-			Action.NONE,  	// [39] ExprListTail = 
-			RETURN2,	// [40] NonEmptyExprList = Expr ExprListTail; returns 'ExprListTail' although none is marked
-			RETURN3,	// [41] Assignment = LHSExpr EQL Expr; returns 'Expr' although none is marked
-			RETURN2,	// [42] LHSExpr = ID BOOLEAN; returns 'BOOLEAN' although none is marked
-			RETURN4,	// [43] LHSExpr = LHSExpr LBRACKET Expr RBRACKET; returns 'RBRACKET' although none is marked
-			Action.RETURN,	// [44] RHSExpr = ArithmeticExpr
-			RETURN3,	// [45] RHSExpr = ArithmeticExpr ComparisionOperator ArithmeticExpr; returns 'ArithmeticExpr' although none is marked
-			new Action() {	// [46] ArithmeticExpr = ArithmeticExpr AdditiveOperator Term
+			RETURN3,	// [24] LocalVariableDeclaration = TypeName ID SEMICOLON; returns 'SEMICOLON' although none is marked
+			RETURN3,	// [25] StatementBlock = LCURLY StatementList RCURLY; returns 'RCURLY' although none is marked
+			RETURN7,	// [26] IfStmt = IF LPAREN Expr RPAREN Statement ELSE Statement; returns 'Statement' although none is marked
+			RETURN5,	// [27] WhileStmt = WHILE LPAREN Expr RPAREN Statement; returns 'Statement' although none is marked
+			RETURN2,	// [28] BreakStmt = BREAK SEMICOLON; returns 'SEMICOLON' although none is marked
+			RETURN3,	// [29] ReturnStmt = RETURN Expr SEMICOLON; returns 'SEMICOLON' although none is marked
+			RETURN2,	// [30] ReturnStmt = RETURN SEMICOLON; returns 'SEMICOLON' although none is marked
+			RETURN2,	// [31] ExprStmt = Expr SEMICOLON; returns 'SEMICOLON' although none is marked
+			Action.RETURN,	// [32] Expr = Assignment
+			Action.RETURN,	// [33] Expr = RHSExpr
+			RETURN2,	// [34] ExprList = Expr ExprListTail; returns 'ExprListTail' although none is marked
+			Action.NONE,  	// [35] ExprList = 
+			RETURN3,	// [36] ExprListTail = COMMA Expr ExprListTail; returns 'ExprListTail' although none is marked
+			Action.NONE,  	// [37] ExprListTail = 
+			RETURN2,	// [38] NonEmptyExprList = Expr ExprListTail; returns 'ExprListTail' although none is marked
+			RETURN3,	// [39] Assignment = LHSExpr EQL Expr; returns 'Expr' although none is marked
+			Action.RETURN,	// [40] RHSExpr = ArithmeticExpr
+			RETURN3,	// [41] RHSExpr = ArithmeticExpr ComparisionOperator ArithmeticExpr; returns 'ArithmeticExpr' although none is marked
+			new Action() {	// [42] ArithmeticExpr = ArithmeticExpr AdditiveOperator Term
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 3]); return _symbols[offset + 1];
 				}
 			},
-			new Action() {	// [47] ArithmeticExpr = Term
+			new Action() {	// [43] ArithmeticExpr = Term
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 				}
 			},
-			new Action() {	// [48] Term = Term MultiplicativeOperator Factor
+			new Action() {	// [44] Term = Term MultiplicativeOperator Factor
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 3]); return _symbols[offset + 1];
 				}
 			},
-			new Action() {	// [49] Term = Factor
+			new Action() {	// [45] Term = Factor
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 				}
 			},
-			Action.RETURN,	// [50] MultiplicativeOperator = TIMES
-			Action.RETURN,	// [51] MultiplicativeOperator = DIV
-			Action.RETURN,	// [52] MultiplicativeOperator = MOD
-			RETURN2,	// [53] Factor = MINUS Factor; returns 'Factor' although none is marked
-			Action.RETURN,	// [54] Factor = PrimaryExpr
-			Action.RETURN,	// [55] PrimaryExpr = LHSExpr
-			Action.RETURN,	// [56] PrimaryExpr = FunctionCall
-			Action.RETURN,	// [57] PrimaryExpr = ArrayExpr
-			Action.RETURN,	// [58] PrimaryExpr = STRING_LITERAL
-			Action.RETURN,	// [59] PrimaryExpr = INT_LITERAL
-			Action.RETURN,	// [60] PrimaryExpr = BooleanLiteral
-			Action.RETURN,	// [61] PrimaryExpr = ParenthesisedExpr
-			RETURN4,	// [62] FunctionCall = ID LPAREN ExprList RPAREN; returns 'RPAREN' although none is marked
-			RETURN3,	// [63] ArrayExpr = LBRACKET NonEmptyExprList RBRACKET; returns 'RBRACKET' although none is marked
-			Action.RETURN,	// [64] BooleanLiteral = TRUE
-			Action.RETURN,	// [65] BooleanLiteral = FALSE
-			RETURN3,	// [66] ParenthesisedExpr = LPAREN Expr RPAREN; returns 'RPAREN' although none is marked
-			Action.RETURN,	// [67] AdditiveOperator = PLUS
-			Action.RETURN,	// [68] AdditiveOperator = MINUS
-			Action.RETURN,	// [69] ComparisionOperator = EQEQ
-			Action.RETURN,	// [70] ComparisionOperator = NEQ
-			Action.RETURN,	// [71] ComparisionOperator = LEQ
-			Action.RETURN,	// [72] ComparisionOperator = GEQ
-			Action.RETURN,	// [73] ComparisionOperator = LT
-			Action.RETURN,	// [74] ComparisionOperator = GT
-			RETURN4,	// [75] FieldDeclarationStmt = Accessibility TypeName ID SEMICOLON; returns 'SEMICOLON' although none is marked
-			RETURN6,	// [76] TypeDeclarationStmt = Accessibility TYPE ID EQL STRING_LITERAL SEMICOLON; returns 'SEMICOLON' although none is marked
-			Action.RETURN,	// [77] TypeName = PrimitiveType
-			Action.RETURN,	// [78] TypeName = ArrayType
-			Action.RETURN,	// [79] TypeName = ID
-			Action.RETURN,	// [80] PrimitiveType = VOID
-			Action.RETURN,	// [81] PrimitiveType = INT
-			Action.RETURN,	// [82] PrimitiveType = BOOLEAN
-			RETURN3	// [83] ArrayType = TypeName LBRACKET RBRACKET; returns 'RBRACKET' although none is marked
+			Action.RETURN,	// [46] MultiplicativeOperator = TIMES
+			Action.RETURN,	// [47] MultiplicativeOperator = DIV
+			Action.RETURN,	// [48] MultiplicativeOperator = MOD
+			RETURN2,	// [49] Factor = MINUS Factor; returns 'Factor' although none is marked
+			Action.RETURN,	// [50] Factor = PrimaryExpr
+			Action.RETURN,	// [51] PrimaryExpr = LHSExpr
+			Action.RETURN,	// [52] PrimaryExpr = FunctionCall
+			Action.RETURN,	// [53] PrimaryExpr = ArrayExpr
+			Action.RETURN,	// [54] PrimaryExpr = STRING_LITERAL
+			Action.RETURN,	// [55] PrimaryExpr = INT_LITERAL
+			Action.RETURN,	// [56] PrimaryExpr = BooleanLiteral
+			Action.RETURN,	// [57] PrimaryExpr = ParenthesisedExpr
+			RETURN4,	// [58] FunctionCall = ID LPAREN ExprList RPAREN; returns 'RPAREN' although none is marked
+			RETURN3,	// [59] ArrayExpr = LBRACKET NonEmptyExprList RBRACKET; returns 'RBRACKET' although none is marked
+			Action.RETURN,	// [60] BooleanLiteral = TRUE
+			Action.RETURN,	// [61] BooleanLiteral = FALSE
+			RETURN3,	// [62] ParenthesisedExpr = LPAREN Expr RPAREN; returns 'RPAREN' although none is marked
+			Action.RETURN,	// [63] AdditiveOperator = PLUS
+			Action.RETURN,	// [64] AdditiveOperator = MINUS
+			Action.RETURN,	// [65] ComparisionOperator = EQEQ
+			Action.RETURN,	// [66] ComparisionOperator = NEQ
+			Action.RETURN,	// [67] ComparisionOperator = LEQ
+			Action.RETURN,	// [68] ComparisionOperator = GEQ
+			Action.RETURN,	// [69] ComparisionOperator = LT
+			Action.RETURN,	// [70] ComparisionOperator = GT
+			RETURN4,	// [71] FieldDeclarationStmt = Accessibility TypeName ID SEMICOLON; returns 'SEMICOLON' although none is marked
+			RETURN6,	// [72] TypeDeclarationStmt = Accessibility TYPE ID EQL STRING_LITERAL SEMICOLON; returns 'SEMICOLON' although none is marked
+			Action.RETURN,	// [73] PrimitiveType = VOID
+			Action.RETURN,	// [74] PrimitiveType = INT
+			Action.RETURN,	// [75] PrimitiveType = BOOLEAN
+			Action.RETURN,	// [76] TypeName = PrimitiveType
+			Action.RETURN,	// [77] TypeName = ArrayType
+			Action.RETURN,	// [78] TypeName = ID
+			RETURN3,	// [79] ArrayType = ID LBRACKET RBRACKET; returns 'RBRACKET' although none is marked
+			RETURN3,	// [80] ArrayType = ArrayType LBRACKET RBRACKET; returns 'RBRACKET' although none is marked
+			Action.RETURN,	// [81] LHSExpr = ID
+			Action.RETURN,	// [82] LHSExpr = IndexExpr
+			RETURN4,	// [83] IndexExpr = ID LBRACKET Expr RBRACKET; returns 'RBRACKET' although none is marked
+			RETURN4	// [84] IndexExpr = IndexExpr LBRACKET Expr RBRACKET; returns 'RBRACKET' although none is marked
 		};
 	}
 
