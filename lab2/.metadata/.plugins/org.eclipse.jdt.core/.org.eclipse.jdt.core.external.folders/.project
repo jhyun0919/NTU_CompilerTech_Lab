@@ -14,5 +14,10 @@
 			<type>2</type>
 			<location>/home/mschaefer/beaver-0.9.11/beaver-rt/src</location>
 		</link>
+		<link>
+			<name>.link1</name>
+			<type>2</type>
+			<location>/Applications/Eclipse.app/Contents/MacOS/C::/home/mschaefer/beaver-0.9.11/beaver-rt/src</location>
+		</link>
 	</linkedResources>
 </projectDescription>
