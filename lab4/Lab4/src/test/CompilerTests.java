@@ -325,22 +325,58 @@ public class CompilerTests {
 				123);
 	}
 	
-	@Test public void test() {
+	@Test public void testArrayFunc() {
 		runtest("module Test {" +
 				" public Int a(){" + 
-				" 	return 5;" +
+				" 	return 0;" +
 				" }" +
-				"  public Boolean f() {" +
-				"  Int foo ;" +
-				"  foo = 123;" +
-				"    return foo != a();" +
+				"  public Int f() {" +
+				"  Int[] intArray" +
+				"  intArray = Int[3];" +
+				"  intArray[0] = 123;" +
+				"    return intArray[a()];" +
 				"  }" +
 				"}",
 				"Test",
 				"f",
 				new Class<?>[0],
 				new Object[0],
-				true);
+				123);
+	}
+	
+	@Test public void testMod() {
+		runtest("module Test {" +
+				"  public Int f() {" +
+				"  Int foo" +
+				"  foo = 5 % 2;" +
+				"    return foo;" +
+				"  }" +
+				"}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				1);
+	}
+	
+	@Test public void testCallParam() {
+		runtest("module Test {" +
+				"  public Int f(Int x) {" +
+				"  if (x <= 5){" +
+				"	return x;" +
+				"	}else{" +
+				"		return f(x-1); " +
+				" 	}" +
+				"  }" +
+				"  public Int foo() {" +
+				"  return f(10);" +
+				"  }" +
+				"}",
+				"Test",
+				"foo",
+				new Class<?>[0],
+				new Object[0],
+				5);
 	}
 	
 	
