@@ -227,5 +227,121 @@ public class CompilerTests {
 				new Object[0],
 				"qwerty");
 	}
-
+	
+	@Test public void testInt() {
+		runtest("module Test {" +
+				"  public Int f() {" +
+				"  Int foo ;" +
+				"  foo = 123;" +
+				"    return foo;" +
+				"  }" +
+				"}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				123);
+	}
+	
+	@Test public void testIntAddition() {
+		runtest("module Test {" +
+				"  public Int f() {" +
+				"  Int foo ;" +
+				"  foo = 123+2;" +
+				"    return foo + 2;" +
+				"  }" +
+				"}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				127);
+	}
+	
+	@Test public void tesBoolean() {
+		runtest("module Test {" +
+				"  public Boolean f() {" +
+				"  Boolean foo ;" +
+				"  foo = True;" +
+				"    return !foo;" +
+				"  }" +
+				"}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				false);
+	}
+	
+	@Test public void testBinaryExper() {
+		runtest("module Test {" +
+				" public Int a(){" + 
+				" 	return 5;" +
+				" }" +
+				"  public Boolean f() {" +
+				"  Int foo ;" +
+				"  foo = 123;" +
+				"    return foo > a();" +
+				"  }" +
+				"}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				true);
+	}
+	
+	@Test public void testNeqExpr() {
+		runtest("module Test {" +
+				" public Int a(){" + 
+				" 	return 5;" +
+				" }" +
+				"  public Boolean f() {" +
+				"  Int foo ;" +
+				"  foo = 123;" +
+				"    return foo != a();" +
+				"  }" +
+				"}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				true);
+	}
+	
+	@Test public void testArrayIndx() {
+		runtest("module Test {" +
+				"  public Int f() {" +
+				"  Int[] intArray" +
+				"  intArray = Int[3];" +
+				"  intArray[0] = 123;" +
+				"    return intArray[0];" +
+				"  }" +
+				"}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				123);
+	}
+	
+	@Test public void test() {
+		runtest("module Test {" +
+				" public Int a(){" + 
+				" 	return 5;" +
+				" }" +
+				"  public Boolean f() {" +
+				"  Int foo ;" +
+				"  foo = 123;" +
+				"    return foo != a();" +
+				"  }" +
+				"}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				true);
+	}
+	
+	
 }
