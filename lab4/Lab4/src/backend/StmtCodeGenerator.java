@@ -106,11 +106,11 @@ public class StmtCodeGenerator extends Visitor<Void> {
 		units.add(start);
 		Value cond = ExprCodeGenerator.generate(nd.getExpr(), fcg);
 		NopStmt end = j.newNopStmt();
+		breakTargets.put(nd, end);
 		units.add(j.newIfStmt(j.newEqExpr(cond, IntConstant.v(0)), end));
 		nd.getBody().accept(this);
 		units.add(j.newGotoStmt(start));
 		units.add(end);
-		breakTargets.put(nd, end);
 		return null;
 	}
 }

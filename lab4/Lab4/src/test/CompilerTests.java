@@ -228,10 +228,10 @@ public class CompilerTests {
 				"qwerty");
 	}
 	
-	@Test public void testInt() {
+	@Test public void testint() {
 		runtest("module Test {" +
-				"  public Int f() {" +
-				"  Int foo ;" +
+				"  public int f() {" +
+				"  int foo ;" +
 				"  foo = 123;" +
 				"    return foo;" +
 				"  }" +
@@ -243,10 +243,10 @@ public class CompilerTests {
 				123);
 	}
 	
-	@Test public void testIntAddition() {
+	@Test public void testintAddition() {
 		runtest("module Test {" +
-				"  public Int f() {" +
-				"  Int foo ;" +
+				"  public int f() {" +
+				"  int foo ;" +
 				"  foo = 123+2;" +
 				"    return foo + 2;" +
 				"  }" +
@@ -258,28 +258,28 @@ public class CompilerTests {
 				127);
 	}
 	
-	@Test public void tesBoolean() {
+	@Test public void testBoolean() {
 		runtest("module Test {" +
-				"  public Boolean f() {" +
-				"  Boolean foo ;" +
-				"  foo = True;" +
-				"    return !foo;" +
+				"  public boolean f() {" +
+				"  boolean foo ;" +
+				"  foo = true;" +
+				"    return foo;" +
 				"  }" +
 				"}",
 				"Test",
 				"f",
 				new Class<?>[0],
 				new Object[0],
-				false);
+				true);
 	}
 	
 	@Test public void testBinaryExper() {
 		runtest("module Test {" +
-				" public Int a(){" + 
+				" public int a(){" + 
 				" 	return 5;" +
 				" }" +
-				"  public Boolean f() {" +
-				"  Int foo ;" +
+				"  public boolean f() {" +
+				"  int foo ;" +
 				"  foo = 123;" +
 				"    return foo > a();" +
 				"  }" +
@@ -293,11 +293,11 @@ public class CompilerTests {
 	
 	@Test public void testNeqExpr() {
 		runtest("module Test {" +
-				" public Int a(){" + 
+				" public int a(){" + 
 				" 	return 5;" +
 				" }" +
-				"  public Boolean f() {" +
-				"  Int foo ;" +
+				"  public boolean f() {" +
+				"  int foo ;" +
 				"  foo = 123;" +
 				"    return foo != a();" +
 				"  }" +
@@ -311,9 +311,9 @@ public class CompilerTests {
 	
 	@Test public void testArrayIndx() {
 		runtest("module Test {" +
-				"  public Int f() {" +
-				"  Int[] intArray" +
-				"  intArray = Int[3];" +
+				"  public int f() {" +
+				"  int[] intArray;" +
+				"  intArray = int[3];" +
 				"  intArray[0] = 123;" +
 				"    return intArray[0];" +
 				"  }" +
@@ -327,12 +327,12 @@ public class CompilerTests {
 	
 	@Test public void testArrayFunc() {
 		runtest("module Test {" +
-				" public Int a(){" + 
+				" public int a(){" + 
 				" 	return 0;" +
 				" }" +
-				"  public Int f() {" +
-				"  Int[] intArray" +
-				"  intArray = Int[3];" +
+				"  public int f() {" +
+				"  int[] intArray;" +
+				"  intArray = int[3];" +
 				"  intArray[0] = 123;" +
 				"    return intArray[a()];" +
 				"  }" +
@@ -346,8 +346,8 @@ public class CompilerTests {
 	
 	@Test public void testMod() {
 		runtest("module Test {" +
-				"  public Int f() {" +
-				"  Int foo" +
+				"  public int f() {" +
+				"  int foo;" +
 				"  foo = 5 % 2;" +
 				"    return foo;" +
 				"  }" +
@@ -361,14 +361,14 @@ public class CompilerTests {
 	
 	@Test public void testCallParam() {
 		runtest("module Test {" +
-				"  public Int f(Int x) {" +
+				"  public int f(int x) {" +
 				"  if (x <= 5){" +
 				"	return x;" +
 				"	}else{" +
 				"		return f(x-1); " +
 				" 	}" +
 				"  }" +
-				"  public Int foo() {" +
+				"  public int foo() {" +
 				"  return f(10);" +
 				"  }" +
 				"}",
@@ -379,5 +379,47 @@ public class CompilerTests {
 				5);
 	}
 	
+	@Test public void testWhile() {
+		runtest("module Test {" +
+				"  public int f() {" +
+				"int x;"
+				+ "x = 0;"
+				+ "while(x<100){"
+				+ "	x = x + 1;"
+				+ " if (x > 10) {"
+				+ "  "
+				+ "} else {"
+				+ "   x = x + 1;"
+				+ "}"
+				+ "}"
+				+ "return x;"
+				+ "}"
+				+ "}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				100);
+	}
 	
+	@Test public void testWhileBreak() {
+		runtest("module Test {" +
+				"  public int f() {" +
+				"int x;"
+				+ "x = 0;"
+				+ "while(x<100){"
+				+ "	x = x + 1;"
+				+ " if (x > 10) {"
+				+ "  break;"
+				+ "}"
+				+ "}"
+				+ "return x;"
+				+ "}"
+				+ "}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				11);
+	}
 }
